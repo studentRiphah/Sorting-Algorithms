@@ -85,3 +85,16 @@ int mid = (first + last)/2;
 }
 
 
+//Quick Sort//
+
+
+void quicksort(int theArray[], int first, int last) {
+int pivotIndex;
+if (first < last) {
+ S1, pivot, S2 partition(theArray, first, last, pivotIndex);
+ quicksort(theArray, first, pivotIndex-1); quicksort(theArray, pivotIndex+1, last);
+}
+}
+
+
+
