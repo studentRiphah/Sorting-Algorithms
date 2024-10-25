@@ -85,6 +85,36 @@ int mid = (first + last)/2;
 }
 
 
+
+//Quick Sort Partition Function//
+
+
+void swap( int &lhs, int &rhs );
+
+void partition(int theArray[], int first, int last, int &pivotIndex) {
+
+// Choose and place pivot in theArray[first]
+choosePivot(theArray, first, last);
+
+// Initialize
+int pivot = theArray[first];
+int lastS1 = first;
+int firstUnknown = first + 1;
+
+// Move one item at a time until unknown region is empty
+for (; firstUnknown <= last; ++firstUnknown) {
+if (theArray[firstUnknown] < pivot) { // Belongs to S1
+++lastS1; // Expands S1 by incrementing lastS1
+// Swap firstUnknown with lastS1
+swap(theArray[firstUnknown], theArray[lastS1]);
+}
+// else belongs to S2, ++firstUnknown in the loop
+// places it to S2
+}
+// Place pivot in proper position and mark its location swap(theArray[first], theArray[lastS1]);
+pivotIndex = lastS1;
+}
+
 //Quick Sort//
 
 
@@ -95,6 +125,4 @@ if (first < last) {
  quicksort(theArray, first, pivotIndex-1); quicksort(theArray, pivotIndex+1, last);
 }
 }
-
-
 
