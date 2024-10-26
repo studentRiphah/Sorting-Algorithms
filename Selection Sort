@@ -1,0 +1,62 @@
+///////////Selection Sort////////
+
+void swap( int &lhs, int &rhs );
+
+void selectionSort( int a[], int n) { for (int i = 0; i < n-1; i++) {
+int min = i;
+for (int j = i+1; j < n; j++){ if (a[j] < a[min]) min = j;
+}
+swap(a[i], a[min]);
+}
+}
+
+
+//////////////Selection Sort Tick Function///////
+
+def selection_sort(arr):
+    ticks = 0
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        ticks += 1
+        for j in range(i+1, n):
+            ticks += 1
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+                ticks += 1
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        ticks += 1
+    return ticks
+
+arr = [64, 25, 12, 22, 11]
+
+ticks = selection_sort(arr)
+print(arr)
+print(ticks)
+
+//////////////////Time calculation for all cases(Best, Worst, Average)////////////////////////
+
+import time
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        min_idx = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+def time_sort(arr):
+    start = time.time()
+    selection_sort(arr[:])
+    return time.time() - start
+
+arr_best = [1, 2, 3, 4, 5]
+arr_average = [64, 25, 12, 22, 11]
+arr_worst = [5, 4, 3, 2, 1]
+
+print(f"Best case: {time_sort(arr_best):.6f} seconds")
+print(f"Average case: {time_sort(arr_average):.6f} seconds")
+print(f"Worst case: {time_sort(arr_worst):.6f} seconds")
+
+
