@@ -1,0 +1,94 @@
+
+////////////////////Quick Sort Partition Function/////////////////
+
+
+void swap( int &lhs, int &rhs );
+
+void partition(int theArray[], int first, int last, int &pivotIndex) {
+
+// Choose and place pivot in theArray[first]
+choosePivot(theArray, first, last);
+
+// Initialize
+int pivot = theArray[first];
+int lastS1 = first;
+int firstUnknown = first + 1;
+
+// Move one item at a time until unknown region is empty
+for (; firstUnknown <= last; ++firstUnknown) {
+if (theArray[firstUnknown] < pivot) { // Belongs to S1
+++lastS1; // Expands S1 by incrementing lastS1
+// Swap firstUnknown with lastS1
+swap(theArray[firstUnknown], theArray[lastS1]);
+}
+// else belongs to S2, ++firstUnknown in the loop
+// places it to S2
+}
+// Place pivot in proper position and mark its location swap(theArray[first], theArray[lastS1]);
+pivotIndex = lastS1;
+}
+
+///////////////Quick Sort/////////////////
+
+
+void quicksort(int theArray[], int first, int last) {
+int pivotIndex;
+if (first < last) {
+ S1, pivot, S2 partition(theArray, first, last, pivotIndex);
+ quicksort(theArray, first, pivotIndex-1); quicksort(theArray, pivotIndex+1, last);
+}
+}
+for j in range(low, high):
+        ticks += 1
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+           
+   ticks += 1
+
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    ticks += 1
+    return i + 1, ticks
+
+  
+   arr = [64, 25, 12, 22, 11]
+  ticks = quick_sort(arr, 0, len(arr) - 1)
+  print("Sorted array:", arr)
+  print("Total ticks (operations):", ticks)
+ Quick Sort Time Calculation for (BEST,AVERAGE,WORST) 
+Cases
+import time
+import random
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+def time_quick_sort(arr):
+    start_time = time.time()
+    quick_sort(arr)
+    return time.time() - start_time
+
+def generate_sorted_array(size):
+    return list(range(size))
+
+def generate_reverse_sorted_array(size):
+    return list(range(size, 0, -1))
+
+def generate_random_array(size):
+    return [random.randint(0, 10000) for _ in range(size)]
+
+if __name__ == "__main__":
+    array_size = 1000
+
+    best_case_time = time_quick_sort(generate_sorted_array(array_size))
+    print(f"Best case (sorted): {best_case_time:.6f} seconds")
+
+    worst_case_time = time_quick_sort(generate_reverse_sorted_array(array_size))
+    print(f"Worst case (reverse sorted): {worst_case_time:.6f} seconds")
+
+
