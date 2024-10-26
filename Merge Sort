@@ -1,0 +1,147 @@
+
+///////////Merge Sort///////////////
+
+
+
+
+
+
+
+
+void merge(int theArray[], int first, int mid, int last) { int tempArray[last+1]; 
+int first1 = first;	
+int first2 = mid + 1;		
+int index = first1;  for ( ; (first1 <= last1) && (first2 <= last2); ++index) {
+if (theArray[first1] < theArray[first2]) { tempArray[index] = theArray[first1];
+++first1;
+}
+else {
+tempArray[index] = theArray[first2];
+++first2;
+}
+}
+
+
+
+for (; first1 <= last1; ++first1, ++index) tempArray[index] = theArray[first1];
+
+
+tempArray[index] = theArray[first2];
+
+
+
+theArray[index] = tempArray[index];
+}
+
+
+
+
+
+
+
+
+void mergesort(int theArray[], int first, int last) {
+if (first < last) {
+int mid = (first + last)/2; 
+
+ mergesort(theArray, first, mid); mergesort(theArray, mid+1, last);
+
+
+ merge(theArray, first, mid, last);
+}
+}
+//////////////Merge Sort Tick Function/////////////////
+
+def merge_sort(arr):
+    ticks = 0
+    if len(arr) <= 1:
+        return arr, ticks
+
+    mid = len(arr) // 2
+    left_sorted, left_ticks = merge_sort(arr[:mid])
+    right_sorted, right_ticks = merge_sort(arr[mid:])
+    ticks += left_ticks + right_ticks
+
+    sorted_arr, merge_ticks = merge(left_sorted, right_sorted)
+    ticks += merge_ticks
+    return sorted_arr, ticks
+
+def merge(left, right):
+    result = []
+    i = j = ticks = 0
+
+    while i < len(left) and j < len(right):
+        ticks += 2
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+       else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    ticks += len(left[i:]) + len(right[j:])
+    return result, ticks
+
+arr = [64, 25, 12, 22, 11]
+sorted_arr, ticks = merge_sort(arr)
+print("Sorted array:", sorted_arr)
+print("Total ticks (operations):", ticks)
+
+
+Merge Sort Time Calculation for (BEST,AVERAGE,WORST) 
+Cases
+
+import time
+import random
+
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
+        merge_sort(L)
+        merge_sort(R)
+        i = j = k = 0
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+        while i < len(L):
+            arr[k] = L[i]
+                        i += 1
+            k += 1
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+def time_merge_sort(arr):
+    start_time = time.time()
+    merge_sort(arr)
+    return time.time() - start_time
+
+def generate_sorted_array(size):
+    return list(range(size))
+
+def generate_reverse_sorted_array(size):
+    return list(range(size, 0, -1))
+
+def generate_random_array(size):
+    return [random.randint(0, 10000) for _ in range(size)]
+if __name__ == "__main__":
+    array_size = 1000
+   best_case_time = time_merge_sort(generate_sorted_array(array_size))
+    print(f"Best case (sorted): {best_case_time:.6f} seconds")
+
+  worst_case_time = time_merge_sort(generate_reverse_sorted_array(array_size))
+    print(f"Worst case (reverse sorted): {worst_case_time:.6f} seconds")
+
+
+
+    average_case_time = time_merge_sort(generate_random_array(array_size))
+    print(f"Average case (random): {average_case_time:.6f} seconds")
